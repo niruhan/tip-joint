@@ -29,3 +29,5 @@ end
 figure,
 filtered_image = mat2gray(filter_output);
 imshow(filtered_image);
+
+imwrite(filtered_image, 'img/gaussian_filtered_img.png');
