@@ -1,0 +1,41 @@
+hw = 1;
+a = hw;
+b = hw;
+
+% define 2D gaussian function
+[Y,X] = meshgrid(-a:a, -b:b);
+sigma = 2;
+g = exp(-(X.^2 + Y.^2)/sigma^2);
+
+% define laplacian denoiser using theorem 1
+mu = 0.1;
+I = eye(2 * hw + 1);
+laplacian = mu * (inv(g) - I);
+
+% Read noisy lena image
+noisy_img = imread("img/noisy_lena.png");
+figure,
+imshow(noisy_img);
+
+% generate matrix o double type with the image values
+[h, w] = size(noisy_img);
+noisy_img_matrix = im2double(noisy_img);
+filter_output = zeros(h, w);
+
+multiplier = inv(I + mu * laplacian);
+
+% filtered_image = multiplier * noisy_img_matrix;
+
+% do patch-wise matrix multiplication
+filter_height = (2 * hw + 1);
+filter_width = (2 * hw + 1);
+
+for m = 1 : (h / filter_height)
+    for n= 1 : (w / filter_width)
+        disp([m,n]);
+        filter_output(m:m + filer_height, n: n + filter_width) = multiplier * noisy_img_matrix(m:m + filter_height, n: n + filter_width);
+    end
+end
+
+
+

@@ -1,15 +1,10 @@
-% Read lena image
-img = imread("img/lena_gray.png");
-figure,
-imshow(img);
-
-% add noise to the image
-noisy_img = imnoise(img,"gaussian");
+% Read noisy lena image
+noisy_img = imread("img/noisy_lena.png");
 figure,
 imshow(noisy_img);
 
 % generate matrix o double type with the image values
-[h, w] = size(img);
+[h, w] = size(noisy_img);
 img_matrix = im2double(noisy_img);
 filter_output = zeros(h, w);
 
