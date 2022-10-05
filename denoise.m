@@ -13,10 +13,13 @@ a = hw;
 b = hw;
 
 % define 2D gaussian function
-[Y,X] = meshgrid(-a:a, -b:b);
-sigma = 1.5;
-g = exp(-(X.^2 + Y.^2)/sigma^2);
+% [Y,X] = meshgrid(-a:a, -b:b);
+% sigma = 1.5;
+% g = exp(-(X.^2 + Y.^2)/sigma^2);
 % surf(g)
+
+% define a random invertible matrix as filter
+g = [1, 2, -1; 2, 1, 2; -1, 2, 1;];
 
 % convolve the noisy image with the gaussian filter
 for m=a+1:h-a

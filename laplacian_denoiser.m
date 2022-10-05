@@ -3,9 +3,18 @@ a = hw;
 b = hw;
 
 % define 2D gaussian function
-[Y,X] = meshgrid(-a:a, -b:b);
-sigma = 2;
-g = exp(-(X.^2 + Y.^2)/sigma^2);
+% [Y,X] = meshgrid(-a:a, -b:b);
+% sigma = 2;
+% g = exp(-(X.^2 + Y.^2)/sigma^2);
+
+% define a 3x3 filter with all values equal to 1/9
+% g = [1/9, 1/9, 1/9; 1/9, 1/9, 1/9; 1/9, 1/9, 1/9;];
+
+% define a 3x3 gaussial-like filter
+% g = [1, 2, 1; 2, 4, 2; 1, 2, 1;];
+
+% define a random invertible matrix as filter
+g = [1, 2, -1; 2, 1, 2; -1, 2, 1;];
 
 % define laplacian denoiser using theorem 1
 mu = 0.1;
