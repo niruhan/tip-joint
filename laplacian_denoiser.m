@@ -14,12 +14,28 @@ b = hw;
 % g = [1, 2, 1; 2, 4, 2; 1, 2, 1;];
 
 % define a random invertible matrix as filter
-g = [1, 2, -1; 2, 1, 2; -1, 2, 1;];
+% g = [1, 2, -1; 2, 1, 2; -1, 2, 1;];
+
+% define a 9x9 filter
+row1 = [1,1,0,1,1,0,0,0,0];
+row2 = [1,1,1,1,1,1,0,0,0];
+row3 = [0,1,1,0,1,1,0,0,0];
+row4 = [1,1,0,1,1,0,1,1,0];
+row5 = [1,1,1,1,1,1,1,1,1];
+row6 = [0,1,1,0,1,1,0,1,1];
+row7 = [0,0,0,1,1,0,1,1,0];
+row8 = [0,0,0,1,1,1,1,1,1];
+row9 = [0,0,0,0,1,1,0,1,1];
+
+g = [row1;row2;row3;row4;row5;row6;row7;row8;row9];
+
+% run sinhorn knopp normalization on g
+g_normalized = sinkhornKnopp(g);
 
 % define laplacian denoiser using theorem 1
 mu = 0.1;
 I = eye(2 * hw + 1);
-laplacian = mu * (inv(g) - I);
+laplacian = mu * (inv(g_normalized) - I);
 
 % Read noisy lena image
 noisy_img = imread("img/noisy_lena.png");
