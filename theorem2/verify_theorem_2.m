@@ -31,3 +31,5 @@ p = pinv(temp);
 q = p * H';
 
 x = q * double(flattened_patch);
+interpolated_patch = x * (1 + gamma);
+interpolated_patch = reshape(interpolated_patch, )
